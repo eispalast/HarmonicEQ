@@ -229,7 +229,97 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 						}
 					break;
 
+					//Band 3
+					case MyFirstPluginParams::kParamEq3o:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							freqOffset[2] = oRange->toPlain(value);
+							f0[2] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq3q:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqq[2] = qRange->toPlain(value);
+							q[2] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq3g:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqg[2] = gRange->toPlain(value);
+							g[2] = true;
+						}
+						break;
 
+						//Band 4
+					case MyFirstPluginParams::kParamEq4o:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							freqOffset[3] = oRange->toPlain(value);
+							f0[3] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq4q:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqq[3] = qRange->toPlain(value);
+							q[3] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq4g:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqg[3] = gRange->toPlain(value);
+							g[3] = true;
+						}
+						break;
+
+						//Band 5
+					case MyFirstPluginParams::kParamEq5o:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							freqOffset[4] = oRange->toPlain(value);
+							f0[4] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq5q:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqq[4] = qRange->toPlain(value);
+							q[4] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq5g:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqg[4] = gRange->toPlain(value);
+							g[4] = true;
+						}
+						break;
+
+						//Band 6
+					case MyFirstPluginParams::kParamEq6o:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							freqOffset[5] = oRange->toPlain(value);
+							f0[5] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq6q:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqq[5] = qRange->toPlain(value);
+							q[5] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq6g:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							eqg[5] = gRange->toPlain(value);
+							g[5] = true;
+						}
+						break;
 				}
 			}
 		PlugProcessor::calc_params(f0,g,q);
@@ -296,7 +386,7 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 				float* ptrOutOri = ptrOut;
 
 				
-				for (int k = 0; k < 2; k++) {
+				for (int k = 0; k < 6; k++) {
 					//if (eqg[k] == 0) {
 					//	memcpy(out[i], in[i], sampleFramesSize);
 					//}

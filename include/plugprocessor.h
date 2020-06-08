@@ -61,7 +61,7 @@ namespace MyFirstPlugin {
 
 		//only recalculate specific parameters
 		void calc_params(bool f0[6], bool g[6], bool q[6]) {
-			bool debug = true;
+			bool debug = false;
 
 			if (debug) myfile.open("G:\VSTPluginOutput2.txt", std::ios::app);
 			if (debug)myfile << "In calc params\n";
