@@ -185,10 +185,10 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
 							eqf0[0] = freqLogscale->scale(value);
-							//for (int32 i = 0; i < 6; i++) {
-							//	eqf0[i] = eqf0[0] * ((double)i + (double)1);
-							//	f0[i] = true;
-							//}
+							for (int32 i = 0; i < 6; i++) {
+								eqf0[i] = eqf0[0] * ((double)i + (double)1);
+								f0[i] = true;
+							}
 							f0[0] = true;
 						}
 						break;
@@ -287,18 +287,21 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 			for (int32 i = 0; i < numChannels; i++)
 			{
 				int32 samples = data.numSamples;
+				int32 samplesOrig = samples;
 				//Vst::Sample32* ptrIn = (Vst::Sample32*)in[i];
 				float* ptrIn = (float*)in[i];
 				//Vst::Sample32* ptrOut = (Vst::Sample32*)out[i];
 				float* ptrOut = (float*)out[i];
-
+				float* ptrInOri = ptrIn;
+				float* ptrOutOri = ptrOut;
 
 				
-				for (int k = 0; k < 1; k++) {
-					if (eqg[k] == 0) {
-						memcpy(out[i], in[i], sampleFramesSize);
-					}
-					else {
+				for (int k = 0; k < 2; k++) {
+					//if (eqg[k] == 0) {
+					//	memcpy(out[i], in[i], sampleFramesSize);
+					//}
+					//else 
+					{
 						while (--samples >= 0){
 							(*ptrOut) =(b0[k] / a0[k]) * (*ptrIn)
 									+(b1[k] / a0[k])*previousInputSample32[k][i][0]
@@ -311,12 +314,14 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 							previousInputSample32[k][i][0] = (*ptrIn);
 							previousSamples32[k][i][1] = previousSamples32[k][i][0];
 							previousSamples32[k][i][0] = (*ptrOut);
+							(*ptrIn) = (*ptrOut);
 							ptrIn++;
 							ptrOut++;
 						}
 					}
-					//ptrIn = (float*)in[i];
-					//ptrOut = (float*)out[i];
+					samples = samplesOrig;
+					ptrIn = ptrInOri;
+					ptrOut = ptrOutOri;
 					//memcpy(ptrIn, ptrOut, sampleFramesSize);
 				}
 			}
