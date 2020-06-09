@@ -73,6 +73,7 @@ namespace MyFirstPlugin {
 				}
 				if (f0[i]) {
 					if (debug)myfile << "\n Changed omega, cos, sin, alpha value for band " << i;
+					//TODO: Watch out for frequencies above 20kHz
 					double omega = (double)(2 * PI * ((eqf0[i]+eqf0[i]*freqOffset[i]) / fs));
 					if (debug)myfile << "\n Omega: " << omega << "  eqf0: "<< eqf0[i] << " i: " << i;
 					cos_omega[i] = (double)cos(omega);
@@ -154,10 +155,16 @@ protected:
 	Vst::Sample32 previousInputSample32[6][10][2];
 	Vst::Sample64 previousInputSample64[6][10][2];
 
-	Vst::LogScale<Vst::ParamValue>* freqLogscale = new Vst::LogScale<Vst::ParamValue>(0., 1., 5., 20000., 0.5, 2000.);
+	Vst::LogScale<Vst::ParamValue>* freqLogscale = new Vst::LogScale<Vst::ParamValue>(0., 1., 5., 20000., 0.5, 1000.);
+	Vst::LogScale<Vst::ParamValue>* qLogscale = new Vst::LogScale<Vst::ParamValue>(0., 1., 0.05, 20., 0.5, 4.);
+
 	Vst::RangeParameter* qRange = new Vst::RangeParameter(STR16("qRange"), NULL, STR16(""), 0.05, 20, 3);
 	Vst::RangeParameter* gRange = new Vst::RangeParameter(STR16("gRange"), NULL, STR16("dB"), -20, 20, 0);
-	Vst::RangeParameter* oRange = new Vst::RangeParameter(STR16("Offset"), NULL, STR16(""), -0.5, 0.5, 0);
+	Vst::RangeParameter* oRange1 = new Vst::RangeParameter(STR16("Offset1"), NULL, STR16(""), -0.5, 0.5, 0);
+	Vst::RangeParameter* oRange2 = new Vst::RangeParameter(STR16("Offset2"), NULL, STR16(""), -0.34, 0.34, 0);
+	Vst::RangeParameter* oRange3 = new Vst::RangeParameter(STR16("Offset3"), NULL, STR16(""), -0.25, 0.25, 0);
+	Vst::RangeParameter* oRange4 = new Vst::RangeParameter(STR16("Offset4"), NULL, STR16(""), -0.2, 0.2, 0);
+	Vst::RangeParameter* oRange5 = new Vst::RangeParameter(STR16("Offset5"), NULL, STR16(""), -0.17, 0.17, 0);
 
 	std::ofstream myfile;
 };

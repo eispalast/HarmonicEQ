@@ -63,7 +63,8 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		                         Vst::ParameterInfo::kCanAutomate, MyFirstPluginParams::kParamVolId, 0,
 		                         STR16 ("Vol1"));
 		Parameter* param;
-		LogScale<ParamValue>* logscale =new LogScale<ParamValue>(0., 1., 5., 20000., 0.5, 2000.);
+		LogScale<ParamValue>* logscale =new LogScale<ParamValue>(0., 1., 5., 20000., 0.5, 1000.);
+		LogScale<ParamValue>* qLogscale = new LogScale<ParamValue>(0., 1., 0.05, 20., 0.5, 4.);
 		
 		//Band 1 has fundamental frequency, the other band's freqs are calculated from the fundamental frequency but can be modified with an offset
 		param = new LogScaleParameter<ParamValue> (STR16 ("Eq1 f"), kParamEq1f0, *logscale,STR16("Hz"));
@@ -71,7 +72,9 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setNormalized(logscale->invscale(80));
 		parameters.addParameter(param);
 
-		param = new RangeParameter(STR16("Eq1 q"), kParamEq1q, STR16(""), 0.05, 20, 3);
+		//param = new RangeParameter(STR16("Eq1 q"), kParamEq1q, STR16(""), 0.05, 20, 3);
+		param = new LogScaleParameter<ParamValue>(STR16("Eq1 q"), kParamEq1q, *qLogscale, STR16("q"));
+		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
@@ -84,7 +87,9 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		param = new RangeParameter(STR16("Eq2 q"), kParamEq2q, STR16(""), 0.05, 20, 3);
+		//param = new RangeParameter(STR16("Eq2 q"), kParamEq2q, STR16(""), 0.05, 20, 3);
+		param = new LogScaleParameter<ParamValue>(STR16("Eq2 q"), kParamEq2q, *qLogscale, STR16("q"));
+		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
@@ -93,11 +98,13 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		parameters.addParameter(param);
 
 		//Band 3
-		param = new RangeParameter(STR16("Eq3 Offset"), kParamEq3o, STR16(""), -2, 2, 0);
+		param = new RangeParameter(STR16("Eq3 Offset"), kParamEq3o, STR16(""), -0.34, 0.34, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		param = new RangeParameter(STR16("Eq3 q"), kParamEq3q, STR16(""), 0.05, 20, 3);
+		//param = new RangeParameter(STR16("Eq3 q"), kParamEq3q, STR16(""), 0.05, 20, 3);
+		param = new LogScaleParameter<ParamValue>(STR16("Eq3 q"), kParamEq3q, *qLogscale, STR16("q"));
+		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
@@ -106,11 +113,13 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		parameters.addParameter(param);
 
 		//Band 4
-		param = new RangeParameter(STR16("Eq4 Offset"), kParamEq4o, STR16(""), -2, 2, 0);
+		param = new RangeParameter(STR16("Eq4 Offset"), kParamEq4o, STR16(""), -0.25, 0.25, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		param = new RangeParameter(STR16("Eq4 q"), kParamEq4q, STR16(""), 0.05, 20, 3);
+		//param = new RangeParameter(STR16("Eq4 q"), kParamEq4q, STR16(""), 0.05, 20, 3);
+		param = new LogScaleParameter<ParamValue>(STR16("Eq4 q"), kParamEq4q, *qLogscale, STR16("q"));
+		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
@@ -119,11 +128,13 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		parameters.addParameter(param);
 
 		//Band 5
-		param = new RangeParameter(STR16("Eq5 Offset"), kParamEq5o, STR16(""), -2, 2, 0);
+		param = new RangeParameter(STR16("Eq5 Offset"), kParamEq5o, STR16(""), -0.2, 0.2, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		param = new RangeParameter(STR16("Eq5 q"), kParamEq5q, STR16(""), 0.05, 20, 3);
+		//param = new RangeParameter(STR16("Eq5 q"), kParamEq5q, STR16(""), 0.05, 20, 3);
+		param = new LogScaleParameter<ParamValue>(STR16("Eq5 q"), kParamEq5q, *qLogscale, STR16("q"));
+		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
@@ -132,11 +143,13 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		parameters.addParameter(param);
 
 		//Band 6
-		param = new RangeParameter(STR16("Eq6 Offset"), kParamEq6o, STR16(""), -2, 2, 0);
+		param = new RangeParameter(STR16("Eq6 Offset"), kParamEq6o, STR16(""), -0.17, 0.17, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		param = new RangeParameter(STR16("Eq6 q"), kParamEq6q, STR16(""), 0.05, 20, 3);
+		//param = new RangeParameter(STR16("Eq6 q"), kParamEq6q, STR16(""), 0.05, 20, 3);
+		param = new LogScaleParameter<ParamValue>(STR16("Eq6 q"), kParamEq6q, *qLogscale, STR16("q"));
+		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
 		parameters.addParameter(param);
 

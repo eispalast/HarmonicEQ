@@ -185,6 +185,7 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
 							eqf0[0] = freqLogscale->scale(value);
+							//TODO: Watch out for frequencies above 20kHz
 							for (int32 i = 0; i < 6; i++) {
 								eqf0[i] = eqf0[0] * ((double)i + (double)1);
 								f0[i] = true;
@@ -195,7 +196,8 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq1q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							eqq[0] = qRange->toPlain(value);
+							//eqq[0] = qRange->toPlain(value);
+							eqq[0] = qLogscale->scale(value);
 							q[0] = true;
 						}
 						break;
@@ -210,14 +212,15 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq2o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							freqOffset[1] = oRange->toPlain(value);
+							freqOffset[1] = oRange1->toPlain(value);
 							f0[1] = true;
 						}
 					break;
 					case MyFirstPluginParams::kParamEq2q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							eqq[1] = qRange->toPlain(value);
+							//eqq[1] = qRange->toPlain(value);
+							eqq[1] = qLogscale->scale(value);
 							q[1] = true;
 						}
 					break;
@@ -233,14 +236,15 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq3o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							freqOffset[2] = oRange->toPlain(value);
+							freqOffset[2] = oRange2->toPlain(value);
 							f0[2] = true;
 						}
 						break;
 					case MyFirstPluginParams::kParamEq3q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							eqq[2] = qRange->toPlain(value);
+							//eqq[2] = qRange->toPlain(value);
+							eqq[2] = qLogscale->scale(value);
 							q[2] = true;
 						}
 						break;
@@ -256,14 +260,15 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq4o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							freqOffset[3] = oRange->toPlain(value);
+							freqOffset[3] = oRange3->toPlain(value);
 							f0[3] = true;
 						}
 						break;
 					case MyFirstPluginParams::kParamEq4q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							eqq[3] = qRange->toPlain(value);
+							//eqq[3] = qRange->toPlain(value);
+							eqq[3] = qLogscale->scale(value);
 							q[3] = true;
 						}
 						break;
@@ -279,14 +284,15 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq5o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							freqOffset[4] = oRange->toPlain(value);
+							freqOffset[4] = oRange4->toPlain(value);
 							f0[4] = true;
 						}
 						break;
 					case MyFirstPluginParams::kParamEq5q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							eqq[4] = qRange->toPlain(value);
+							//eqq[4] = qRange->toPlain(value);
+							eqq[4] = qLogscale->scale(value);
 							q[4] = true;
 						}
 						break;
@@ -302,14 +308,15 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq6o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							freqOffset[5] = oRange->toPlain(value);
+							freqOffset[5] = oRange5->toPlain(value);
 							f0[5] = true;
 						}
 						break;
 					case MyFirstPluginParams::kParamEq6q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							eqq[5] = qRange->toPlain(value);
+							//eqq[5] = qRange->toPlain(value);
+							eqq[5] = qLogscale->scale(value);
 							q[5] = true;
 						}
 						break;
