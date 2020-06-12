@@ -118,7 +118,7 @@ tresult PLUGIN_API PlugProcessor::setupProcessing (Vst::ProcessSetup& setup)
 }
 
 //-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::setActive (TBool state)
+tresult PLUGIN_API PlugProcessor::setActive(TBool state)
 {
 	if (state) // Initialize
 	{
@@ -131,90 +131,100 @@ tresult PLUGIN_API PlugProcessor::setActive (TBool state)
 		// Ex: if(algo.isCreated ()) { algo.destroy (); }
 	}
 	//Initialize the globals or else no calculation can be done
-	
-	
+
+
 	//myfile.open("G:\VSTPluginOutput.txt", std::ios::app);
 	//myfile << "Set Active\n";
 	//myfile.close();
 	//PlugProcessor::calc_params();
-	return AudioEffect::setActive (state);
+	return AudioEffect::setActive(state);
 }
 
 
 
 
 //-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
+tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 {
 	//--- Read inputs parameter changes-----------
 	if (data.inputParameterChanges)
 	{
-		bool q[6] =	{false,false,false,false,false,false};
-		bool f0[6] ={false,false,false,false,false,false};
-		bool g[6] =	{false,false,false,false,false,false};
-		int32 numParamsChanged = data.inputParameterChanges->getParameterCount ();
+		bool q[6] = { false,false,false,false,false,false };
+		bool f0[6] = { false,false,false,false,false,false };
+		bool g[6] = { false,false,false,false,false,false };
+		int32 numParamsChanged = data.inputParameterChanges->getParameterCount();
 		for (int32 index = 0; index < numParamsChanged; index++)
 		{
 			Vst::IParamValueQueue* paramQueue =
-			    data.inputParameterChanges->getParameterData (index);
+				data.inputParameterChanges->getParameterData(index);
 			if (paramQueue)
 			{
-				
+
 				Vst::ParamValue value;
 				int32 sampleOffset;
-				int32 numPoints = paramQueue->getPointCount ();
-				switch (paramQueue->getParameterId ())
+				int32 numPoints = paramQueue->getPointCount();
+				switch (paramQueue->getParameterId())
 				{
-					case MyFirstPluginParams::kParamVolId:
-						if (paramQueue->getPoint (numPoints - 1, sampleOffset, value) ==
-						    kResultTrue)
-							mParam1 = value;
-						break;
-					case MyFirstPluginParams::kParamOnId:
-						if (paramQueue->getPoint (numPoints - 1, sampleOffset, value) ==
-						    kResultTrue)
-							mParam2 = value > 0 ? 1 : 0;
-						break;
-					case MyFirstPluginParams::kBypassId:
-						if (paramQueue->getPoint (numPoints - 1, sampleOffset, value) ==
-						    kResultTrue)
-							mBypass = (value > 0.5f);
-						break;
-					//Band 1
-					case MyFirstPluginParams::kParamEq1f0:
-						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
-							kResultTrue) {
-							eqf0[0] = freqLogscale->scale(value);
-							//TODO: Watch out for frequencies above 20kHz
-							for (int32 i = 0; i < 6; i++) {
-								eqf0[i] = eqf0[0] * ((double)i + (double)1);
-								f0[i] = true;
-							}
-							
+				case MyFirstPluginParams::kParamVolId:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue)
+						mParam1 = value;
+					break;
+				case MyFirstPluginParams::kParamOnId:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue)
+						mParam2 = value > 0 ? 1 : 0;
+					break;
+				case MyFirstPluginParams::kBypassId:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue)
+						mBypass = (value > 0.5f);
+					break;
+					//General
+				case MyFirstPluginParams::kParamEq1f0:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue) {
+						eqf0[0] = freqLogscale->scale(value);
+						//TODO: Watch out for frequencies above 20kHz
+						for (int32 i = 0; i < 6; i++) {
+							eqf0[i] = eqf0[0] * ((double)i + (double)1);
+							f0[i] = true;
 						}
-						break;
 
-					case MyFirstPluginParams::kParamEq1o:
-						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
-							kResultTrue) {
-							freqOffset[0] = oRange0->toPlain(value);
-							f0[0] = true;
+					}
+					break;
+					//Band 1
+				case MyFirstPluginParams::kParamEq1o:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue) {
+						freqOffset[0] = oRange0->toPlain(value);
+						f0[0] = true;
+					}
+					break;
+				case MyFirstPluginParams::kParamEq1q:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue) {
+						//eqq[0] = qRange->toPlain(value);
+						eqq[0] = qLogscale->scale(value);
+						q[0] = true;
+					}
+					break;
+				case MyFirstPluginParams::kParamEq1g:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+						kResultTrue) {
+						eqg[0] = gRange->toPlain(value);
+						g[0] = true;
+					}
+					break;
+				case MyFirstPluginParams::kParamEq1on:
+					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) == kResultTrue){
+						if (value < 0.5) {
+							eqactive[0] = false;
 						}
-						break;
-					case MyFirstPluginParams::kParamEq1q:
-						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
-							kResultTrue) {
-							//eqq[0] = qRange->toPlain(value);
-							eqq[0] = qLogscale->scale(value);
-							q[0] = true;
+						else {
+							eqactive[0] = true;
 						}
-						break;
-					case MyFirstPluginParams::kParamEq1g:
-						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
-							kResultTrue) {
-							eqg[0] = gRange->toPlain(value);
-							g[0] = true;
-						}
+					}
 					break;
 					//Band 2
 					case MyFirstPluginParams::kParamEq2o:
@@ -239,6 +249,16 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 							g[1] = true;
 						}
 					break;
+					case MyFirstPluginParams::kParamEq2on:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) == kResultTrue) {
+							if (value < 0.5) {
+								eqactive[1] = false;
+							}
+							else {
+								eqactive[1] = true;
+							}
+						}
+						break;
 
 					//Band 3
 					case MyFirstPluginParams::kParamEq3o:
@@ -261,6 +281,17 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 							kResultTrue) {
 							eqg[2] = gRange->toPlain(value);
 							g[2] = true;
+						}
+						break;
+
+					case MyFirstPluginParams::kParamEq3on:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) == kResultTrue) {
+							if (value < 0.5) {
+								eqactive[2] = false;
+							}
+							else {
+								eqactive[2] = true;
+							}
 						}
 						break;
 
@@ -288,6 +319,17 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 						}
 						break;
 
+					case MyFirstPluginParams::kParamEq4on:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) == kResultTrue) {
+							if (value < 0.5) {
+								eqactive[3] = false;
+							}
+							else {
+								eqactive[3] = true;
+							}
+						}
+						break;
+
 						//Band 5
 					case MyFirstPluginParams::kParamEq5o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
@@ -311,7 +353,16 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 							g[4] = true;
 						}
 						break;
-
+					case MyFirstPluginParams::kParamEq5on:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) == kResultTrue) {
+							if (value < 0.5) {
+								eqactive[4] = false;
+							}
+							else {
+								eqactive[4] = true;
+							}
+						}
+						break;
 						//Band 6
 					case MyFirstPluginParams::kParamEq6o:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
@@ -333,6 +384,16 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 							kResultTrue) {
 							eqg[5] = gRange->toPlain(value);
 							g[5] = true;
+						}
+						break;
+					case MyFirstPluginParams::kParamEq6on:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) == kResultTrue) {
+							if (value < 0.5) {
+								eqactive[5] = false;
+							}
+							else {
+								eqactive[5] = true;
+							}
 						}
 						break;
 				}
@@ -400,12 +461,12 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 				float* ptrInOri = ptrIn;
 				float* ptrOutOri = ptrOut;
 
-				
+				//a loop for every Eq Band (k)
 				for (int k = 0; k < 6; k++) {
-					//if (eqg[k] == 0) {
-					//	memcpy(out[i], in[i], sampleFramesSize);
-					//}
-					//else 
+					if (eqg[k] == 0 || eqactive[k]==false) {
+						memcpy(out[i], in[i], sampleFramesSize);
+					}
+					else 
 					{
 						while (--samples >= 0){
 							(*ptrOut) =(b0[k] / a0[k]) * (*ptrIn)

@@ -85,6 +85,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param = new RangeParameter(STR16("Eq1 gain"), kParamEq1g, STR16("dB"), -20, 20, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
+		
+		parameters.addParameter(STR16("Eq1 Status"), STR16("On/Off"), 1, 1.,
+			Vst::ParameterInfo::kCanAutomate, kParamEq1on, 0,
+			STR16("Eq1S"));
 
 		//Band 2
 		param = new RangeParameter(STR16("Eq2 Offset"), kParamEq2o, STR16(""), -0.5, 0.5, 0);
@@ -101,6 +105,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
+		parameters.addParameter(STR16("Eq2 Status"), STR16("On/Off"), 1, 1.,
+			Vst::ParameterInfo::kCanAutomate, kParamEq2on, 0,
+			STR16("Eq2S"));
+
 		//Band 3
 		param = new RangeParameter(STR16("Eq3 Offset"), kParamEq3o, STR16(""), -0.34, 0.34, 0);
 		param->setPrecision(2);
@@ -116,6 +124,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
+		parameters.addParameter(STR16("Eq3 Status"), STR16("On/Off"), 1, 1.,
+			Vst::ParameterInfo::kCanAutomate, kParamEq3on, 0,
+			STR16("Eq3S"));
+
 		//Band 4
 		param = new RangeParameter(STR16("Eq4 Offset"), kParamEq4o, STR16(""), -0.25, 0.25, 0);
 		param->setPrecision(2);
@@ -130,6 +142,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param = new RangeParameter(STR16("Eq4 gain"), kParamEq4g, STR16("dB"), -20, 20, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
+		
+		parameters.addParameter(STR16("Eq4 Status"), STR16("On/Off"), 1, 1.,
+			Vst::ParameterInfo::kCanAutomate, kParamEq4on, 0,
+			STR16("Eq4S"));
 
 		//Band 5
 		param = new RangeParameter(STR16("Eq5 Offset"), kParamEq5o, STR16(""), -0.2, 0.2, 0);
@@ -146,6 +162,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
+		parameters.addParameter(STR16("Eq5 Status"), STR16("On/Off"), 1, 1.,
+			Vst::ParameterInfo::kCanAutomate, kParamEq5on, 0,
+			STR16("Eq5S"));
+
 		//Band 6
 		param = new RangeParameter(STR16("Eq6 Offset"), kParamEq6o, STR16(""), -0.17, 0.17, 0);
 		param->setPrecision(2);
@@ -160,6 +180,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param = new RangeParameter(STR16("Eq6 gain"), kParamEq6g, STR16("dB"), -20, 20, 0);
 		param->setPrecision(2);
 		parameters.addParameter(param);
+
+		parameters.addParameter(STR16("Eq6 Status"), STR16("On/Off"), 1, 1.,
+			Vst::ParameterInfo::kCanAutomate, kParamEq6on, 0,
+			STR16("Eq6S"));
 
 		
 	}

@@ -141,6 +141,7 @@ protected:
 	double cos_omega[6];
 	double alpha[6];
 	double freqOffset[6] = { 0,0,0,0,0,0 }; 
+	bool eqactive[6] = { true, true, true, true, true, true };
 	double A[6];
 	double a0[6]= {1.3685761281637796, 0,0,0,0,0};
 	double a1[6]= {-1.8200702223285332,0,0,0,0,0};

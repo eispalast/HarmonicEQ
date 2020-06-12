@@ -6,9 +6,9 @@
 	<colors>
 	</colors>
 	<template background-color="~ BlackCColor" background-color-draw-style="filled and stroked" bitmap="background" class="CViewContainer" mouse-enabled="true" name="view" opacity="1" origin="0, 0" size="470, 200" transparent="false" wants-focus="false">
-		<view bitmap="onoff_button" class="COnOffButton" control-tag="ParamOn" default-value="1" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="3, 18" size="125, 82" tooltip="This is a On/Off Button" transparent="false" wants-focus="true" wheel-inc-value="0.1"/>
+		<view bitmap="onoff_button" class="COnOffButton" control-tag="Eq1Status" default-value="1" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="3, 18" size="125, 82" tooltip="This is a On/Off Button" transparent="false" wants-focus="true" wheel-inc-value="0.1"/>
 		<view angle-range="270" angle-start="135" bitmap="animation_knob" class="CAnimKnob" control-tag="Eq1f" default-value="0" height-of-one-image="111" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="127, 4" size="121, 121" sub-pixmaps="61" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.02" zoom-factor="1.5"/>
-		<view back-color="~ BlackCColor" background-offset="0, 0" class="CTextEdit" control-tag="Eq1f" default-value="0" font="beba" font-antialias="true" font-color="~ WhiteCColor" frame-color="~ BlackCColor" frame-width="1" immediate-text-change="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="150, 90" round-rect-radius="6" secure-style="false" shadow-color="~ GreyCColor" size="70, 20" style-3D-in="false" style-3D-out="false" style-doubleclick="false" style-no-draw="false" style-no-frame="false" style-no-text="false" style-round-rect="false" style-shadow-text="true" text-alignment="center" text-inset="0, 0" text-rotation="0" text-shadow-offset="1, 1" title="340.8" transparent="true" value-precision="2" wants-focus="true" wheel-inc-value="0.1"/>
+		<view back-color="~ BlackCColor" background-offset="0, 0" class="CTextEdit" control-tag="Eq1f" default-value="0" font="beba" font-antialias="true" font-color="~ WhiteCColor" frame-color="~ BlackCColor" frame-width="1" immediate-text-change="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="150, 90" round-rect-radius="6" secure-style="false" shadow-color="~ GreyCColor" size="70, 20" style-3D-in="false" style-3D-out="false" style-doubleclick="false" style-no-draw="false" style-no-frame="false" style-no-text="false" style-round-rect="false" style-shadow-text="true" text-alignment="center" text-inset="0, 0" text-rotation="0" text-shadow-offset="1, 1" title="947.9" transparent="true" value-precision="2" wants-focus="true" wheel-inc-value="0.1"/>
 		<view angle-range="270" angle-start="135" bitmap="animation_knob" class="CAnimKnob" control-tag="Eq1gain" default-value="0.5" height-of-one-image="111" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="240, 0" size="110, 120" sub-pixmaps="61" transparent="false" value-inset="0" wants-focus="false" wheel-inc-value="0.1" zoom-factor="1.5"/>
 	</template>
 	<custom>
@@ -16,11 +16,11 @@
 		<attributes Path="G:\VST\vst-sdk_3.6.14_build-24_2019-11-29\VST_SDK\my_plugins\MyFirstPlugin\resource\plug.uidesc" name="VST3Editor"/>
 		<attributes Grids="1x 1,5x 5,10x 10,12x 12,15x 15" Size="10, 10" name="UIGridController"/>
 		<attributes SelectedTemplate="view" name="UITemplateController"/>
-		<attributes EditViewScale="1" EditorSize="0, 0, 1151, 707" SplitViewSize_0_0="0.8105726872246695746682121352932881563902" SplitViewSize_0_1="0.1600587371512481593693877357509336434305" SplitViewSize_1_0="0.5095447870778266885594121049507521092892" SplitViewSize_1_1="0.4831130690161526963777305354597046971321" SplitViewSize_2_0="0.6663770634231103162647968929377384483814" SplitViewSize_2_1="0.3292788879235447607740638886753004044294" TabSwitchValue="6" Version="1" name="UIEditController"/>
+		<attributes EditViewScale="1" EditorSize="0, 0, 1151, 707" SplitViewSize_0_0="0.8105726872246695746682121352932881563902" SplitViewSize_0_1="0.1600587371512481593693877357509336434305" SplitViewSize_1_0="0.5095447870778266885594121049507521092892" SplitViewSize_1_1="0.4831130690161526963777305354597046971321" SplitViewSize_2_0="0.6663770634231103162647968929377384483814" SplitViewSize_2_1="0.3292788879235447607740638886753004044294" TabSwitchValue="1" Version="1" name="UIEditController"/>
 		<attributes name="UIAttributesController"/>
 		<attributes SelectedRow="0" name="UIViewCreatorDataSource"/>
 		<attributes SelectedRow="0" name="UIBitmapsDataSource"/>
-		<attributes SelectedRow="1" name="UITagsDataSource"/>
+		<attributes SelectedRow="2" name="UITagsDataSource"/>
 		<attributes SelectedRow="-1" name="UIColorsDataSource"/>
 		<attributes SelectedRow="0" name="UIFontsDataSource"/>
 	</custom>
@@ -37,6 +37,8 @@
 	</bitmaps>
 	<control-tags>
 		<control-tag name="Bypass" tag="100"/>
+		<control-tag name="Eq1Offset" tag="10011"/>
+		<control-tag name="Eq1Status" tag="1004"/>
 		<control-tag name="Eq1f" tag="1001"/>
 		<control-tag name="Eq1gain" tag="1003"/>
 		<control-tag name="Eq1q" tag="1002"/>
