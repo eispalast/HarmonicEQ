@@ -190,6 +190,14 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 								eqf0[i] = eqf0[0] * ((double)i + (double)1);
 								f0[i] = true;
 							}
+							
+						}
+						break;
+
+					case MyFirstPluginParams::kParamEq1o:
+						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
+							kResultTrue) {
+							freqOffset[0] = oRange0->toPlain(value);
 							f0[0] = true;
 						}
 						break;

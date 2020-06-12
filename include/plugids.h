@@ -49,6 +49,7 @@ namespace MyFirstPlugin {
 		kParamVolId = 102,
 		kParamOnId = 1000,
 		kParamEq1f0 = 1001,
+		kParamEq1o = 10011,
 		kParamEq1q = 1002,
 		kParamEq1g = 1003,
 		kParamEq2o = 2001,

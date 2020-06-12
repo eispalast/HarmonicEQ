@@ -140,7 +140,7 @@ protected:
 	double sin_omega[6];
 	double cos_omega[6];
 	double alpha[6];
-	double freqOffset[6] = { 0,0,0,0,0,0 }; // for finetuning. only used for the other 5 bands, but I use 6 channels here to keep it uniform
+	double freqOffset[6] = { 0,0,0,0,0,0 }; 
 	double A[6];
 	double a0[6]= {1.3685761281637796, 0,0,0,0,0};
 	double a1[6]= {-1.8200702223285332,0,0,0,0,0};
@@ -160,6 +160,7 @@ protected:
 
 	Vst::RangeParameter* qRange = new Vst::RangeParameter(STR16("qRange"), NULL, STR16(""), 0.05, 20, 3);
 	Vst::RangeParameter* gRange = new Vst::RangeParameter(STR16("gRange"), NULL, STR16("dB"), -20, 20, 0);
+	Vst::RangeParameter* oRange0 = new Vst::RangeParameter(STR16("Offset0"), NULL, STR16(""), -0.9, 0.9, 0);
 	Vst::RangeParameter* oRange1 = new Vst::RangeParameter(STR16("Offset1"), NULL, STR16(""), -0.5, 0.5, 0);
 	Vst::RangeParameter* oRange2 = new Vst::RangeParameter(STR16("Offset2"), NULL, STR16(""), -0.34, 0.34, 0);
 	Vst::RangeParameter* oRange3 = new Vst::RangeParameter(STR16("Offset3"), NULL, STR16(""), -0.25, 0.25, 0);

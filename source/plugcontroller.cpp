@@ -72,6 +72,10 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setNormalized(logscale->invscale(80));
 		parameters.addParameter(param);
 
+		param = new RangeParameter(STR16("Eq1 Offset"), kParamEq1o, STR16(""), -0.9, 0.9, 0);
+		param->setPrecision(2);
+		parameters.addParameter(param);
+
 		//param = new RangeParameter(STR16("Eq1 q"), kParamEq1q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq1 q"), kParamEq1q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
@@ -173,6 +177,20 @@ IPlugView* PLUGIN_API PlugController::createView (const char* name)
 	}
 	return nullptr;
 }
+/*
+
+IPlugView* PLUGIN_API PlugController::createView(FIDString name)
+{
+	if (strcmp(name, Vst::ViewType::kEditor) == 0)
+	{
+		return new VSTGUI::VST3Editor(this, "view", "myEditor.uidesc");
+	}
+	return 0;
+}
+*/
+
+
+
 
 //------------------------------------------------------------------------
 tresult PLUGIN_API PlugController::setComponentState (IBStream* state)
