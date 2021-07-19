@@ -59,14 +59,17 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		                         Vst::ParameterInfo::kCanAutomate | Vst::ParameterInfo::kIsBypass,
 		                         MyFirstPluginParams::kBypassId);
 
-		parameters.addParameter (STR16 ("Master Volume"), STR16 ("dB"), 0, .9,
-		                         Vst::ParameterInfo::kCanAutomate, MyFirstPluginParams::kParamVolId, 0,
-		                         STR16 ("Vol1"));
 		Parameter* param;
+		param = new Parameter(STR16("Master Volume"), kParamVolId, STR16("Factor"), 0.5, 0, Vst::ParameterInfo::kCanAutomate);
+		
+		param->setNormalized((ParamValue)0.5);
+		parameters.addParameter(param);
+		
 		LogScale<ParamValue>* logscale =new LogScale<ParamValue>(0., 1., 5., 20000., 0.5, 1000.);
 		LogScale<ParamValue>* qLogscale = new LogScale<ParamValue>(0., 1., 0.05, 20., 0.5, 4.);
 		
 		//Band 1 has fundamental frequency, the other band's freqs are calculated from the fundamental frequency but can be modified with an offset
+		//well the above statement is not true anymore. There is also an offset for the first band 
 		param = new LogScaleParameter<ParamValue> (STR16 ("Eq1 f"), kParamEq1f0, *logscale,STR16("Hz"));
 		param->setPrecision(1);
 		param->setNormalized(logscale->invscale(80));
@@ -76,7 +79,6 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		//param = new RangeParameter(STR16("Eq1 q"), kParamEq1q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq1 q"), kParamEq1q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
@@ -95,7 +97,6 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		//param = new RangeParameter(STR16("Eq2 q"), kParamEq2q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq2 q"), kParamEq2q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
@@ -114,7 +115,6 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		//param = new RangeParameter(STR16("Eq3 q"), kParamEq3q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq3 q"), kParamEq3q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
@@ -133,7 +133,6 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		//param = new RangeParameter(STR16("Eq4 q"), kParamEq4q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq4 q"), kParamEq4q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
@@ -152,7 +151,6 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		//param = new RangeParameter(STR16("Eq5 q"), kParamEq5q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq5 q"), kParamEq5q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
@@ -171,7 +169,6 @@ tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 		param->setPrecision(2);
 		parameters.addParameter(param);
 
-		//param = new RangeParameter(STR16("Eq6 q"), kParamEq6q, STR16(""), 0.05, 20, 3);
 		param = new LogScaleParameter<ParamValue>(STR16("Eq6 q"), kParamEq6q, *qLogscale, STR16("q"));
 		param->setNormalized(qLogscale->invscale(4));
 		param->setPrecision(2);
@@ -201,17 +198,7 @@ IPlugView* PLUGIN_API PlugController::createView (const char* name)
 	}
 	return nullptr;
 }
-/*
 
-IPlugView* PLUGIN_API PlugController::createView(FIDString name)
-{
-	if (strcmp(name, Vst::ViewType::kEditor) == 0)
-	{
-		return new VSTGUI::VST3Editor(this, "view", "myEditor.uidesc");
-	}
-	return 0;
-}
-*/
 
 
 
@@ -226,7 +213,7 @@ tresult PLUGIN_API PlugController::setComponentState (IBStream* state)
 
 	IBStreamer streamer (state, kLittleEndian);
 
-	float savedParam1 = 0.f;
+	float savedParam1 = 0.5f;
 	if (streamer.readFloat (savedParam1) == false)
 		return kResultFalse;
 	setParamNormalized (MyFirstPluginParams::kParamVolId, savedParam1);

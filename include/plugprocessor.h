@@ -96,6 +96,10 @@ namespace MyFirstPlugin {
 					if (debug)myfile << "\n Changed b1 a1 value for band " << i;
 					b1[i] = -2 * cos_omega[i];
 					a1[i] = -2 * cos_omega[i];
+					b0[i] = 1 + alpha[i] * A[i];
+					b2[i] = 1 - alpha[i] * A[i];
+					a0[i] = 1 + (alpha[i] / A[i]);
+					a2[i] = 1 - (alpha[i] / A[i]);
 				}
 			}
 			if (debug) {
@@ -149,6 +153,7 @@ protected:
 	double b0[6]= {1.1165540056163676, 0,0,0,0,0};
 	double b1[6]= {-1.8200702223285332,0,0,0,0,0};
 	double b2[6]= {0.8834459943836322, 0,0,0,0,0};
+	double gain = 0.5;
 
 	//[Band][Maximum number of channels][last/secondlast Sample]
 	Vst::Sample32 previousSamples32[6][10][2];

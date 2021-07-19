@@ -47,7 +47,7 @@ class PlugController : public Vst::EditController, public VSTGUI::VST3EditorDele
 {
 public:
 //------------------------------------------------------------------------
-	// create function required for Plug-in factory,
+	// create function required for Plug-in factory, 
 	// it will be called to create new instances of this controller
 //------------------------------------------------------------------------
 	static FUnknown* createInstance (void*)

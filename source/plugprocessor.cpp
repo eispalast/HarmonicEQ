@@ -136,7 +136,7 @@ tresult PLUGIN_API PlugProcessor::setActive(TBool state)
 	//myfile.open("G:\VSTPluginOutput.txt", std::ios::app);
 	//myfile << "Set Active\n";
 	//myfile.close();
-	//PlugProcessor::calc_params();
+
 	return AudioEffect::setActive(state);
 }
 
@@ -168,7 +168,7 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 				case MyFirstPluginParams::kParamVolId:
 					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 						kResultTrue)
-						mParam1 = value;
+						gain = value;
 					break;
 				case MyFirstPluginParams::kParamOnId:
 					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
@@ -185,7 +185,7 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 						kResultTrue) {
 						eqf0[0] = freqLogscale->scale(value);
-						//TODO: Watch out for frequencies above 20kHz
+						//TODO: Watch out for frequencies above 20kHz?
 						for (int32 i = 0; i < 6; i++) {
 							eqf0[i] = eqf0[0] * ((double)i + (double)1);
 							f0[i] = true;
@@ -204,7 +204,6 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 				case MyFirstPluginParams::kParamEq1q:
 					if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 						kResultTrue) {
-						//eqq[0] = qRange->toPlain(value);
 						eqq[0] = qLogscale->scale(value);
 						q[0] = true;
 					}
@@ -237,7 +236,6 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq2q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							//eqq[1] = qRange->toPlain(value);
 							eqq[1] = qLogscale->scale(value);
 							q[1] = true;
 						}
@@ -271,7 +269,6 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq3q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							//eqq[2] = qRange->toPlain(value);
 							eqq[2] = qLogscale->scale(value);
 							q[2] = true;
 						}
@@ -306,7 +303,6 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq4q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							//eqq[3] = qRange->toPlain(value);
 							eqq[3] = qLogscale->scale(value);
 							q[3] = true;
 						}
@@ -341,7 +337,6 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq5q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							//eqq[4] = qRange->toPlain(value);
 							eqq[4] = qLogscale->scale(value);
 							q[4] = true;
 						}
@@ -374,7 +369,6 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					case MyFirstPluginParams::kParamEq6q:
 						if (paramQueue->getPoint(numPoints - 1, sampleOffset, value) ==
 							kResultTrue) {
-							//eqq[5] = qRange->toPlain(value);
 							eqq[5] = qLogscale->scale(value);
 							q[5] = true;
 						}
@@ -454,9 +448,8 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 			{
 				int32 samples = data.numSamples;
 				int32 samplesOrig = samples;
-				//Vst::Sample32* ptrIn = (Vst::Sample32*)in[i];
+				
 				float* ptrIn = (float*)in[i];
-				//Vst::Sample32* ptrOut = (Vst::Sample32*)out[i];
 				float* ptrOut = (float*)out[i];
 				float* ptrInOri = ptrIn;
 				float* ptrOutOri = ptrOut;
@@ -488,9 +481,20 @@ tresult PLUGIN_API PlugProcessor::process(Vst::ProcessData& data)
 					samples = samplesOrig;
 					ptrIn = ptrInOri;
 					ptrOut = ptrOutOri;
-					//memcpy(ptrIn, ptrOut, sampleFramesSize);
+					
+				}
+
+				//apply output gain
+				if (gain != 0.5) {
+					while (--samples >= 0) {
+						(*ptrOut) = (*ptrOut) * 2 * gain;
+						ptrOut++;
+					}
 				}
 			}
+
+		
+
 			
 		}else {
 			/*
