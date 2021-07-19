@@ -44,29 +44,35 @@ namespace MyFirstPlugin {
 	{
 		kBypassId = 100,
 
-		//o= offset, q=q, g=gain
+		//o= offset, q=q, g=gain,on
 
 		kParamVolId = 102,
 		kParamOnId = 1000,
-		kParamEq1f0 = 1001,
-		kParamEq1o = 10011,
+		kParamEq1f0 = 1001, //fundamental frequency
+		kParamEq1o = 10011, 
 		kParamEq1q = 1002,
 		kParamEq1g = 1003,
+		kParamEq1on = 1004,
 		kParamEq2o = 2001,
 		kParamEq2q = 2002,
 		kParamEq2g = 2003,
+		kParamEq2on = 2004,
 		kParamEq3o = 3001,
 		kParamEq3q = 3002,
 		kParamEq3g = 3003,
+		kParamEq3on = 3004,
 		kParamEq4o = 4001,
 		kParamEq4q = 4002,
 		kParamEq4g = 4003,
+		kParamEq4on = 4004,
 		kParamEq5o = 5001,
 		kParamEq5q = 5002,
 		kParamEq5g = 5003,
+		kParamEq5on = 5004,
 		kParamEq6o = 6001,
 		kParamEq6q = 6002,
 		kParamEq6g = 6003,
+		kParamEq6on = 6004,
 
 		
 

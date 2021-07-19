@@ -1,71 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vstgui-ui-description version="1">
 	<fonts>
-		<font font-name="Arial" name="beba" size="12"/>
+		<font font-name="Segment7 Standard" name="7seg" size="18"/>
 	</fonts>
 	<colors>
 	</colors>
-	<template background-color="~ BlackCColor" background-color-draw-style="filled and stroked" bitmap="background" class="CViewContainer" mouse-enabled="true" name="view" opacity="1" origin="0, 0" size="470, 200" transparent="false" wants-focus="false">
-		<view bitmap="onoff_button" class="COnOffButton" control-tag="ParamOn" default-value="1" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="3, 18" size="125, 82" tooltip="This is a On/Off Button" transparent="false" wants-focus="true" wheel-inc-value="0.1"/>
-		<view angle-range="270" angle-start="135" bitmap="animation_knob" class="CAnimKnob" control-tag="Eq1f" default-value="0" height-of-one-image="111" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="127, 4" size="121, 121" sub-pixmaps="61" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.02" zoom-factor="1.5"/>
-		<view back-color="~ BlackCColor" background-offset="0, 0" class="CTextEdit" control-tag="Eq1f" default-value="0" font="beba" font-antialias="true" font-color="~ WhiteCColor" frame-color="~ BlackCColor" frame-width="1" immediate-text-change="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="150, 90" round-rect-radius="6" secure-style="false" shadow-color="~ GreyCColor" size="70, 20" style-3D-in="false" style-3D-out="false" style-doubleclick="false" style-no-draw="false" style-no-frame="false" style-no-text="false" style-round-rect="false" style-shadow-text="true" text-alignment="center" text-inset="0, 0" text-rotation="0" text-shadow-offset="1, 1" title="340.8" transparent="true" value-precision="2" wants-focus="true" wheel-inc-value="0.1"/>
-		<view angle-range="270" angle-start="135" bitmap="animation_knob" class="CAnimKnob" control-tag="Eq1gain" default-value="0.5" height-of-one-image="111" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="240, 0" size="110, 120" sub-pixmaps="61" transparent="false" value-inset="0" wants-focus="false" wheel-inc-value="0.1" zoom-factor="1.5"/>
+	<template background-color="~ BlackCColor" background-color-draw-style="filled and stroked" bitmap="background org halb" class="CViewContainer" mouse-enabled="true" name="view" opacity="1" origin="0, 0" size="960, 540" transparent="false" wants-focus="false">
+		<view bitmap="onoff_button" class="COnOffButton" control-tag="Eq1Status" default-value="1" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="183, 118" size="125, 82" tooltip="This is a On/Off Button" transparent="false" wants-focus="true" wheel-inc-value="0.1"/>
+		<view angle-range="270" angle-start="135" bitmap="1gCombined untereinadner halb" class="CAnimKnob" control-tag="Eq1Offset" default-value="0.5" height-of-one-image="130" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="187, 214" size="111, 111" sub-pixmaps="61" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.01" zoom-factor="1.5"/>
+		<view back-color="~ BlackCColor" background-offset="0, 0" class="CTextEdit" control-tag="Eq1f" default-value="0" font="7seg" font-antialias="true" font-color="~ WhiteCColor" frame-color="~ BlackCColor" frame-width="1" immediate-text-change="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="37, 364" round-rect-radius="6" secure-style="false" shadow-color="~ RedCColor" size="100, 40" style-3D-in="false" style-3D-out="false" style-doubleclick="false" style-no-draw="false" style-no-frame="false" style-no-text="false" style-round-rect="false" style-shadow-text="false" text-alignment="center" text-inset="0, 0" text-rotation="0" text-shadow-offset="1, 1" title="3537.1" transparent="true" value-precision="2" wants-focus="true" wheel-inc-value="0.1"/>
+		<view angle-range="270" angle-start="135" bitmap="animation_knob" class="CAnimKnob" control-tag="Eq1f" default-value="0" height-of-one-image="111" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="30, 230" size="110, 130" sub-pixmaps="61" transparent="false" value-inset="0" wants-focus="false" wheel-inc-value="0.1" zoom-factor="1.5"/>
+		<view angle-range="270" angle-start="135" bitmap="1gCombined untereinadner halb" class="CAnimKnob" control-tag="Eq1gain" default-value="0.5" height-of-one-image="130" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="187, 314" size="111, 111" sub-pixmaps="61" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.01" zoom-factor="1.5"/>
+		<view angle-range="270" angle-start="135" bitmap="1gCombined untereinadner halb" class="CAnimKnob" control-tag="Eq1q" default-value="0" height-of-one-image="130" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="187, 414" size="111, 111" sub-pixmaps="61" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.01" zoom-factor="1.5"/>
 	</template>
 	<custom>
 		<attributes name="FocusDrawing"/>
 		<attributes Path="G:\VST\vst-sdk_3.6.14_build-24_2019-11-29\VST_SDK\my_plugins\MyFirstPlugin\resource\plug.uidesc" name="VST3Editor"/>
 		<attributes Grids="1x 1,5x 5,10x 10,12x 12,15x 15" Size="10, 10" name="UIGridController"/>
 		<attributes SelectedTemplate="view" name="UITemplateController"/>
-		<attributes EditViewScale="1" EditorSize="0, 0, 1151, 707" SplitViewSize_0_0="0.8105726872246695746682121352932881563902" SplitViewSize_0_1="0.1600587371512481593693877357509336434305" SplitViewSize_1_0="0.5095447870778266885594121049507521092892" SplitViewSize_1_1="0.4831130690161526963777305354597046971321" SplitViewSize_2_0="0.6663770634231103162647968929377384483814" SplitViewSize_2_1="0.3292788879235447607740638886753004044294" TabSwitchValue="6" Version="1" name="UIEditController"/>
+		<attributes EditViewScale="1" EditorSize="0, 0, 1497, 843" SplitViewSize_0_0="0.8421052631578946900958726473618298768997" SplitViewSize_0_1="0.1334149326805385560312799952953355386853" SplitViewSize_1_0="0.5091799265605875257634238550963345915079" SplitViewSize_1_1="0.4847001223990208274017277290113270282745" SplitViewSize_2_0="0.7434869739478957573197703823097981512547" SplitViewSize_2_1="0.2531730126920507806254079241625731810927" TabSwitchValue="0" Version="1" name="UIEditController"/>
 		<attributes name="UIAttributesController"/>
 		<attributes SelectedRow="0" name="UIViewCreatorDataSource"/>
 		<attributes SelectedRow="0" name="UIBitmapsDataSource"/>
-		<attributes SelectedRow="1" name="UITagsDataSource"/>
-		<attributes SelectedRow="-1" name="UIColorsDataSource"/>
+		<attributes SelectedRow="0" name="UITagsDataSource"/>
+		<attributes SelectedRow="-1" name="UIGradientsDataSource"/>
 		<attributes SelectedRow="0" name="UIFontsDataSource"/>
 	</custom>
 	<bitmaps>
-		<bitmap name="background" path="background.png"/>
+		<bitmap name="1gCombined untereinadner halb" path="G:\VST\vst-sdk_3.6.14_build-24_2019-11-29\VST_SDK\my_plugins\MyFirstPlugin\resource\1gCombined untereinadner halb.png"/>
 		<bitmap name="animation_knob" path="animation_knob.png"/>
-		<bitmap name="onoff_button" path="onoff_button.png"/>
-		<bitmap name="background_2x" path="background_2x.png" scale-factor="2"/>
 		<bitmap name="animation_knob_2x" path="animation_knob_2x.png" scale-factor="2"/>
-		<bitmap name="onoff_button_2x" path="onoff_button_2x.png" scale-factor="2"/>
-		<bitmap name="background_3x" path="background_3x.png" scale-factor="3"/>
 		<bitmap name="animation_knob_3x" path="animation_knob_3x.png" scale-factor="3"/>
+		<bitmap name="background" path="background.png"/>
+		<bitmap name="background org halb" path="G:\VST\vst-sdk_3.6.14_build-24_2019-11-29\VST_SDK\my_plugins\MyFirstPlugin\resource\background org halb.png"/>
+		<bitmap name="background_2x" path="background_2x.png" scale-factor="2"/>
+		<bitmap name="background_3x" path="background_3x.png" scale-factor="3"/>
+		<bitmap name="onoff_button" path="onoff_button.png"/>
+		<bitmap name="onoff_button_2x" path="onoff_button_2x.png" scale-factor="2"/>
 		<bitmap name="onoff_button_3x" path="onoff_button_3x.png" scale-factor="3"/>
 	</bitmaps>
 	<control-tags>
 		<control-tag name="Bypass" tag="100"/>
+		<control-tag name="Eq1Offset" tag="10011"/>
+		<control-tag name="Eq1Status" tag="1004"/>
 		<control-tag name="Eq1f" tag="1001"/>
 		<control-tag name="Eq1gain" tag="1003"/>
 		<control-tag name="Eq1q" tag="1002"/>
 		<control-tag name="Eq2Offset" tag="2001"/>
+		<control-tag name="Eq2Status" tag="2004"/>
 		<control-tag name="Eq2gain" tag="2003"/>
 		<control-tag name="Eq2q" tag="2002"/>
 		<control-tag name="Eq3Offset" tag="3001"/>
+		<control-tag name="Eq3Status" tag="3004"/>
 		<control-tag name="Eq3gain" tag="3003"/>
 		<control-tag name="Eq3q" tag="3002"/>
 		<control-tag name="Eq4Offset" tag="4001"/>
+		<control-tag name="Eq4Status" tag="4004"/>
 		<control-tag name="Eq4gain" tag="4003"/>
 		<control-tag name="Eq4q" tag="4002"/>
 		<control-tag name="Eq5Offset" tag="5001"/>
+		<control-tag name="Eq5Status" tag="5004"/>
 		<control-tag name="Eq5gain" tag="5003"/>
 		<control-tag name="Eq5q" tag="5002"/>
 		<control-tag name="Eq6Offset" tag="6001"/>
+		<control-tag name="Eq6Status" tag="6004"/>
 		<control-tag name="Eq6gain" tag="6003"/>
 		<control-tag name="Eq6q" tag="6002"/>
 		<control-tag name="MasterVolume" tag="102"/>
 		<control-tag name="ParamOn" tag="1000"/>
 	</control-tags>
-	<gradients>
-		<gradient name="Default TextButton Gradient">
-			<color-stop rgba="#dcdcdcff" start="0"/>
-			<color-stop rgba="#b4b4b4ff" start="1"/>
-		</gradient>
-		<gradient name="Default TextButton Gradient Highlighted">
-			<color-stop rgba="#b4b4b4ff" start="0"/>
-			<color-stop rgba="#646464ff" start="1"/>
-		</gradient>
-	</gradients>
+	<gradients/>
 </vstgui-ui-description>
